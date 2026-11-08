@@ -1,0 +1,8 @@
+{
+  "name": "プランナーの５つのプロヂュース・可視化アプリ",
+  "description": "多様なブライダルスタイル、人前式進行タイムライン、会費制×一流×低価格の収支構造を可視化するプランナー研修＆ウエディングプロデュース支援アプリ（著作権者: shigenori,watanabe）",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
