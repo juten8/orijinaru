@@ -106,45 +106,163 @@ export default function App() {
 
         {/* メインコンテンツエリア */}
         <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-8">
-          {/* 【最重要注意点】会場予約前の計画分岐トラップ */}
-          {activeTab !== 'proposal' && (
-            <PreBookingWarningBanner
-              userRole={userRole}
-              compact={activeTab !== 'styles'}
-            />
-          )}
+          {/* プロデュースツール 選択タブハブ（全画面で常時切替可能） */}
+          <div className="no-print bg-white p-2.5 sm:p-3 rounded-2xl border border-stone-200 shadow-sm">
+            <div className="flex items-center justify-between text-xs text-stone-500 mb-2 px-1">
+              <span className="font-semibold text-stone-700">プロデュース機能・研修ツール切り替え</span>
+              <span className="hidden sm:inline font-mono">クリックで即座に画面が切り替わります</span>
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 text-xs">
+              <button
+                type="button"
+                onClick={() => {
+                  setActiveTab('styles');
+                  try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch {}
+                }}
+                className={`flex flex-col items-center justify-center p-2.5 sm:p-3 rounded-xl border transition-all text-center ${
+                  activeTab === 'styles'
+                    ? 'bg-stone-900 text-white border-stone-900 shadow-md font-bold ring-2 ring-stone-900/20'
+                    : 'bg-stone-50 hover:bg-stone-100 text-stone-700 border-stone-200'
+                }`}
+              >
+                <span className="text-sm mb-0.5">🌸</span>
+                <span className="whitespace-nowrap font-medium">① スタイル比較</span>
+                <span className={`text-[10px] mt-0.5 ${activeTab === 'styles' ? 'text-amber-300' : 'text-stone-400'}`}>
+                  5大挙式スタイル
+                </span>
+              </button>
 
-          {activeTab === 'styles' && (
-            <StyleComparisonView
-              userRole={userRole}
-              onSelectStyleForSim={handleSelectStyleForSim}
-              onGoToCeremony={handleGoToCeremony}
-            />
-          )}
+              <button
+                type="button"
+                onClick={() => {
+                  setActiveTab('phases');
+                  try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch {}
+                }}
+                className={`flex flex-col items-center justify-center p-2.5 sm:p-3 rounded-xl border transition-all text-center ${
+                  activeTab === 'phases'
+                    ? 'bg-stone-900 text-white border-stone-900 shadow-md font-bold ring-2 ring-stone-900/20'
+                    : 'bg-stone-50 hover:bg-stone-100 text-stone-700 border-stone-200'
+                }`}
+              >
+                <span className="text-sm mb-0.5">📋</span>
+                <span className="whitespace-nowrap font-medium">② 準備工程管理</span>
+                <span className={`text-[10px] mt-0.5 ${activeTab === 'phases' ? 'text-amber-300' : 'text-stone-400'}`}>
+                  全5フェーズ・タスク
+                </span>
+              </button>
 
-        {activeTab === 'phases' && (
-          <PhaseManagementView userRole={userRole} />
-        )}
+              <button
+                type="button"
+                onClick={() => {
+                  setActiveTab('ceremony');
+                  try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch {}
+                }}
+                className={`flex flex-col items-center justify-center p-2.5 sm:p-3 rounded-xl border transition-all text-center ${
+                  activeTab === 'ceremony'
+                    ? 'bg-amber-700 text-white border-amber-700 shadow-md font-bold ring-2 ring-amber-700/20'
+                    : 'bg-stone-50 hover:bg-stone-100 text-stone-700 border-stone-200'
+                }`}
+              >
+                <span className="text-sm mb-0.5">⏱️</span>
+                <span className="whitespace-nowrap font-medium">③ 人前式進行</span>
+                <span className={`text-[10px] mt-0.5 ${activeTab === 'ceremony' ? 'text-amber-200' : 'text-stone-400'}`}>
+                  30分台本・タイムライン
+                </span>
+              </button>
 
-        {activeTab === 'ceremony' && (
-          <CeremonyTimelineView userRole={userRole} />
-        )}
+              <button
+                type="button"
+                onClick={() => {
+                  setActiveTab('simulator');
+                  try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch {}
+                }}
+                className={`flex flex-col items-center justify-center p-2.5 sm:p-3 rounded-xl border transition-all text-center ${
+                  activeTab === 'simulator'
+                    ? 'bg-stone-900 text-white border-stone-900 shadow-md font-bold ring-2 ring-stone-900/20'
+                    : 'bg-stone-50 hover:bg-stone-100 text-stone-700 border-stone-200'
+                }`}
+              >
+                <span className="text-sm mb-0.5">💰</span>
+                <span className="whitespace-nowrap font-medium">④ 収支試算</span>
+                <span className={`text-[10px] mt-0.5 ${activeTab === 'simulator' ? 'text-amber-300' : 'text-stone-400'}`}>
+                  会費制×低価格計算
+                </span>
+              </button>
 
-        {activeTab === 'simulator' && (
-          <CostSimulatorView
-            userRole={userRole}
-            initialParams={simParams}
-          />
-        )}
+              <button
+                type="button"
+                onClick={() => {
+                  setActiveTab('beauty');
+                  try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch {}
+                }}
+                className={`flex flex-col items-center justify-center p-2.5 sm:p-3 rounded-xl border transition-all text-center ${
+                  activeTab === 'beauty'
+                    ? 'bg-stone-900 text-white border-stone-900 shadow-md font-bold ring-2 ring-stone-900/20'
+                    : 'bg-stone-50 hover:bg-stone-100 text-stone-700 border-stone-200'
+                }`}
+              >
+                <span className="text-sm mb-0.5">👘</span>
+                <span className="whitespace-nowrap font-medium">⑤ 着付け＆美容</span>
+                <span className={`text-[10px] mt-0.5 ${activeTab === 'beauty' ? 'text-amber-300' : 'text-stone-400'}`}>
+                  和装補正・15分チェンジ
+                </span>
+              </button>
 
-        {activeTab === 'beauty' && (
-          <BeautyGuideView userRole={userRole} />
-        )}
+              <button
+                type="button"
+                onClick={() => {
+                  setActiveTab('proposal');
+                  try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch {}
+                }}
+                className={`flex flex-col items-center justify-center p-2.5 sm:p-3 rounded-xl border transition-all text-center ${
+                  activeTab === 'proposal'
+                    ? 'bg-stone-900 text-white border-stone-900 shadow-md font-bold ring-2 ring-stone-900/20'
+                    : 'bg-stone-50 hover:bg-stone-100 text-stone-700 border-stone-200'
+                }`}
+              >
+                <span className="text-sm mb-0.5">📄</span>
+                <span className="whitespace-nowrap font-medium">⑥ 提案書印刷</span>
+                <span className={`text-[10px] mt-0.5 ${activeTab === 'proposal' ? 'text-amber-300' : 'text-stone-400'}`}>
+                  仕様書・PDF出力
+                </span>
+              </button>
+            </div>
+          </div>
 
-        {activeTab === 'proposal' && (
-          <ProposalSheetView onBack={() => setActiveTab('styles')} />
-        )}
-      </main>
+          {/* 各機能ビューの描画（選択したタブが即座に表示） */}
+          <div key={activeTab} className="transition-opacity duration-150">
+            {activeTab === 'styles' && (
+              <StyleComparisonView
+                userRole={userRole}
+                onSelectStyleForSim={handleSelectStyleForSim}
+                onGoToCeremony={handleGoToCeremony}
+              />
+            )}
+
+            {activeTab === 'phases' && (
+              <PhaseManagementView userRole={userRole} />
+            )}
+
+            {activeTab === 'ceremony' && (
+              <CeremonyTimelineView userRole={userRole} />
+            )}
+
+            {activeTab === 'simulator' && (
+              <CostSimulatorView
+                userRole={userRole}
+                initialParams={simParams}
+              />
+            )}
+
+            {activeTab === 'beauty' && (
+              <BeautyGuideView userRole={userRole} />
+            )}
+
+            {activeTab === 'proposal' && (
+              <ProposalSheetView onBack={() => setActiveTab('styles')} />
+            )}
+          </div>
+        </main>
 
       {/* フッター（クワイエット・著作権表示） */}
       <footer className="no-print bg-stone-900 text-stone-400 text-xs border-t border-stone-800 py-10 mt-16">

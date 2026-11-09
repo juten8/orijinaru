@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { BRIDAL_STYLES, BridalStyle } from '../data/bridalData';
 import { formatYen } from '../utils/costCalculator';
 import { Check, Sparkles, HeartHandshake, ArrowRight, Eye, ShieldAlert } from 'lucide-react';
+import { PreBookingWarningBanner } from './PreBookingWarningBanner';
 
 interface StyleComparisonViewProps {
   userRole: 'planner' | 'couple';
@@ -69,6 +70,9 @@ export const StyleComparisonView: React.FC<StyleComparisonViewProps> = ({
           </div>
         </div>
       </div>
+
+      {/* 【最重要注意点】会場予約前の計画分岐トラップ */}
+      <PreBookingWarningBanner userRole={userRole} />
 
       {/* スタイル選択バー ＆ 表示切替 */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-stone-200">
