@@ -144,7 +144,7 @@ export const BRIDAL_STYLES: BridalStyle[] = [
     },
     plannerSecret:
       '【研修ノウハウ】式場持込料0円のレストランと提携することが最大の鍵。料理のクオリティを妥協せず、余計な中間マージンをカットしてゲスト満足度を最大化させます。',
-    imageUrl: '/src/assets/images/hero_bridal_produce_1794103261552.jpg',
+    imageUrl: '/images/hero_bridal_produce.jpg',
     merits: [
       'ゲスト負担が半額以下（1.8万円程度）で気軽に参加できる',
       '新郎新婦の自己負担が劇的に少なく、明朗会計',
@@ -177,7 +177,7 @@ export const BRIDAL_STYLES: BridalStyle[] = [
     },
     plannerSecret:
       '【研修ノウハウ】完全な立食にせず「全員分の着席シート」を確保することが一流感の維持に必須。料理を取りに行く動線と新郎新婦の移動ラインが交差しないレイアウト設計がプロの技です。',
-    imageUrl: '/src/assets/images/party_buffet_style_1794103263678.jpg',
+    imageUrl: '/images/party_buffet_style.jpg',
     merits: [
       'ゲストが好みの量・種類を自由に楽しめ、満足度が高い',
       'テーブルを超えた交流が自然発生し会場全体が盛り上がる',
@@ -210,7 +210,7 @@ export const BRIDAL_STYLES: BridalStyle[] = [
     },
     plannerSecret:
       '【研修ノウハウ】家族婚の司会は「親族紹介の深掘り」と「家族史アルバムの共有」が感動のキモ。間延びさせず、親御様が涙する感謝の手紙や記念品贈呈のタイミングを綿密に設計します。',
-    imageUrl: '/src/assets/images/beauty_kimono_dressing_1794103262736.jpg',
+    imageUrl: '/images/beauty_kimono_dressing.jpg',
     merits: [
       '家族全員とじっくり会話ができ、両家の絆が深く結ばれる',
       '一人あたりの料理・引き出物の質を極限まで高められる',
@@ -243,7 +243,7 @@ export const BRIDAL_STYLES: BridalStyle[] = [
     },
     plannerSecret:
       '【研修ノウハウ】カメラマンと美容師の呼吸（チームワーク）がすべて。撮影ポーズに応じた着物の袖・裾の直しを美容師が先回りして行うことで、撮影カット数が1.5倍に増加します。',
-    imageUrl: '/src/assets/images/beauty_kimono_dressing_1794103262736.jpg',
+    imageUrl: '/images/beauty_kimono_dressing.jpg',
     merits: [
       '衣装・ロケーション・写真のクオリティに予算を全集中できる',
       '式場に縛られず、想い出の場所（母校、出会いの公園、絶景）で撮影可能',
@@ -276,7 +276,7 @@ export const BRIDAL_STYLES: BridalStyle[] = [
     },
     plannerSecret:
       '【研修ノウハウ】「世界観の統一（トーン＆マナー）」が命。招待状からBGM、司会進行のセリフの言い回し、スタッフの衣装まで一貫した世界観で統率することがプロデュースの腕の見せ所です。',
-    imageUrl: '/src/assets/images/hero_bridal_produce_1794103261552.jpg',
+    imageUrl: '/images/hero_bridal_produce.jpg',
     merits: [
       '一生忘れられない強烈なインパクトと感動をゲストに刻み込める',
       'SNS映え抜群で、写真や動画のオリジナリティが突出する',

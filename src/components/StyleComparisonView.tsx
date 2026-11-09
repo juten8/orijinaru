@@ -25,9 +25,12 @@ export const StyleComparisonView: React.FC<StyleComparisonViewProps> = ({
       <div className="relative overflow-hidden rounded-2xl bg-stone-900 text-white shadow-xl">
         <div className="absolute inset-0 z-0">
           <img
-            src="/src/assets/images/hero_bridal_produce_1794103261552.jpg"
+            src="/images/hero_bridal_produce.jpg"
             alt="日本の伝統と洗練された現代ウェディング"
             referrerPolicy="no-referrer"
+            onError={(e) => {
+              e.currentTarget.style.display = 'none';
+            }}
             className="w-full h-full object-cover opacity-35"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-stone-950 via-stone-900/80 to-transparent" />
@@ -145,6 +148,9 @@ export const StyleComparisonView: React.FC<StyleComparisonViewProps> = ({
                   src={currentStyle.imageUrl}
                   alt={currentStyle.name}
                   referrerPolicy="no-referrer"
+                  onError={(e) => {
+                    e.currentTarget.style.display = 'none';
+                  }}
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute top-3 left-3 bg-stone-900/85 backdrop-blur-xs text-white text-xs px-2.5 py-1 rounded">

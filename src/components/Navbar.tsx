@@ -77,10 +77,13 @@ export const Navbar: React.FC<NavbarProps> = ({
         </div>
 
         {/* ゾーン2: ナビゲーションリンク */}
-        <nav className="hidden lg:flex items-center gap-6 text-sm font-medium">
+        <nav className="hidden md:flex items-center gap-4 lg:gap-6 text-xs lg:text-sm font-medium">
           <button
             type="button"
-            onClick={() => setActiveTab('styles')}
+            onClick={() => {
+              setActiveTab('styles');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
             className={`py-1.5 transition-colors whitespace-nowrap border-b-2 ${
               activeTab === 'styles'
                 ? 'border-stone-900 text-stone-900 font-semibold'
@@ -91,7 +94,10 @@ export const Navbar: React.FC<NavbarProps> = ({
           </button>
           <button
             type="button"
-            onClick={() => setActiveTab('phases')}
+            onClick={() => {
+              setActiveTab('phases');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
             className={`py-1.5 transition-colors whitespace-nowrap border-b-2 ${
               activeTab === 'phases'
                 ? 'border-stone-900 text-stone-900 font-semibold'
@@ -102,7 +108,10 @@ export const Navbar: React.FC<NavbarProps> = ({
           </button>
           <button
             type="button"
-            onClick={() => setActiveTab('ceremony')}
+            onClick={() => {
+              setActiveTab('ceremony');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
             className={`py-1.5 transition-colors whitespace-nowrap border-b-2 flex items-center gap-1.5 ${
               activeTab === 'ceremony'
                 ? 'border-amber-700 text-amber-900 font-semibold'
@@ -114,7 +123,10 @@ export const Navbar: React.FC<NavbarProps> = ({
           </button>
           <button
             type="button"
-            onClick={() => setActiveTab('simulator')}
+            onClick={() => {
+              setActiveTab('simulator');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
             className={`py-1.5 transition-colors whitespace-nowrap border-b-2 ${
               activeTab === 'simulator'
                 ? 'border-stone-900 text-stone-900 font-semibold'
@@ -125,7 +137,10 @@ export const Navbar: React.FC<NavbarProps> = ({
           </button>
           <button
             type="button"
-            onClick={() => setActiveTab('beauty')}
+            onClick={() => {
+              setActiveTab('beauty');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
             className={`py-1.5 transition-colors whitespace-nowrap border-b-2 ${
               activeTab === 'beauty'
                 ? 'border-stone-900 text-stone-900 font-semibold'
@@ -141,17 +156,20 @@ export const Navbar: React.FC<NavbarProps> = ({
           <button
             type="button"
             onClick={onOpenPrint}
-            className="flex items-center gap-1.5 px-3.5 py-2 text-xs font-medium text-stone-800 bg-stone-100 hover:bg-stone-200 rounded-md transition-colors whitespace-nowrap border border-stone-200"
+            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-stone-800 bg-stone-100 hover:bg-stone-200 rounded-md transition-colors whitespace-nowrap border border-stone-200"
           >
             <Printer className="w-3.5 h-3.5 text-stone-600" />
-            <span className="hidden sm:inline">提案書・研修シート印刷</span>
+            <span className="hidden sm:inline">提案書・研修シート</span>
             <span className="sm:hidden">印刷</span>
           </button>
 
           <button
             type="button"
-            onClick={() => setActiveTab('simulator')}
-            className="px-4 py-2 text-xs font-medium text-white bg-amber-700 hover:bg-amber-800 rounded-md shadow-xs transition-colors whitespace-nowrap"
+            onClick={() => {
+              setActiveTab('simulator');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            className="px-3.5 py-1.5 text-xs font-medium text-white bg-amber-700 hover:bg-amber-800 rounded-md shadow-xs transition-colors whitespace-nowrap"
           >
             収支を計算する
           </button>
@@ -159,48 +177,63 @@ export const Navbar: React.FC<NavbarProps> = ({
       </div>
 
       {/* モバイル用ナビゲーションバー */}
-      <div className="lg:hidden flex items-center overflow-x-auto px-4 py-2 bg-stone-50 border-t border-stone-200 gap-2 no-scrollbar text-xs">
+      <div className="md:hidden flex items-center overflow-x-auto px-4 py-2 bg-stone-50 border-t border-stone-200 gap-2 no-scrollbar text-xs">
         <button
           type="button"
-          onClick={() => setActiveTab('styles')}
-          className={`px-3 py-1.5 rounded whitespace-nowrap ${
-            activeTab === 'styles' ? 'bg-stone-900 text-white' : 'text-stone-600'
+          onClick={() => {
+            setActiveTab('styles');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+          className={`px-3 py-1.5 rounded whitespace-nowrap font-medium transition-colors ${
+            activeTab === 'styles' ? 'bg-stone-900 text-white shadow-xs' : 'text-stone-600 bg-white border border-stone-200'
           }`}
         >
           スタイル比較
         </button>
         <button
           type="button"
-          onClick={() => setActiveTab('phases')}
-          className={`px-3 py-1.5 rounded whitespace-nowrap ${
-            activeTab === 'phases' ? 'bg-stone-900 text-white' : 'text-stone-600'
+          onClick={() => {
+            setActiveTab('phases');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+          className={`px-3 py-1.5 rounded whitespace-nowrap font-medium transition-colors ${
+            activeTab === 'phases' ? 'bg-stone-900 text-white shadow-xs' : 'text-stone-600 bg-white border border-stone-200'
           }`}
         >
           準備工程
         </button>
         <button
           type="button"
-          onClick={() => setActiveTab('ceremony')}
-          className={`px-3 py-1.5 rounded whitespace-nowrap font-medium ${
-            activeTab === 'ceremony' ? 'bg-amber-700 text-white' : 'text-amber-800'
+          onClick={() => {
+            setActiveTab('ceremony');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+          className={`px-3 py-1.5 rounded whitespace-nowrap font-medium transition-colors ${
+            activeTab === 'ceremony' ? 'bg-amber-700 text-white shadow-xs' : 'text-amber-800 bg-white border border-amber-200'
           }`}
         >
           人前式進行
         </button>
         <button
           type="button"
-          onClick={() => setActiveTab('simulator')}
-          className={`px-3 py-1.5 rounded whitespace-nowrap ${
-            activeTab === 'simulator' ? 'bg-stone-900 text-white' : 'text-stone-600'
+          onClick={() => {
+            setActiveTab('simulator');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+          className={`px-3 py-1.5 rounded whitespace-nowrap font-medium transition-colors ${
+            activeTab === 'simulator' ? 'bg-stone-900 text-white shadow-xs' : 'text-stone-600 bg-white border border-stone-200'
           }`}
         >
           収支シミュレーター
         </button>
         <button
           type="button"
-          onClick={() => setActiveTab('beauty')}
-          className={`px-3 py-1.5 rounded whitespace-nowrap ${
-            activeTab === 'beauty' ? 'bg-stone-900 text-white' : 'text-stone-600'
+          onClick={() => {
+            setActiveTab('beauty');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+          className={`px-3 py-1.5 rounded whitespace-nowrap font-medium transition-colors ${
+            activeTab === 'beauty' ? 'bg-stone-900 text-white shadow-xs' : 'text-stone-600 bg-white border border-stone-200'
           }`}
         >
           着付け＆美容

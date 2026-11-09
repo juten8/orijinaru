@@ -18,6 +18,58 @@ import { BridalStyle, COPYRIGHT_INFO } from './data/bridalData';
 import { SimulatorParams, DEFAULT_SIMULATOR_PARAMS } from './utils/costCalculator';
 import { ShieldCheck, Heart, Sparkles, GraduationCap } from 'lucide-react';
 
+interface ErrorBoundaryProps {
+  children: React.ReactNode;
+}
+
+interface ErrorBoundaryState {
+  hasError: boolean;
+  error: Error | null;
+}
+
+class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
+  constructor(props: ErrorBoundaryProps) {
+    super(props);
+    this.state = { hasError: false, error: null };
+  }
+
+  static getDerivedStateFromError(error: Error): ErrorBoundaryState {
+    return { hasError: true, error };
+  }
+
+  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+    console.error('App Error Boundary caught an error:', error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="p-8 max-w-2xl mx-auto my-12 bg-white rounded-2xl border border-rose-300 text-stone-900 shadow-lg space-y-4">
+          <div className="flex items-center gap-2 text-rose-700 font-bold text-lg">
+            <span>表示エラーを検出しました</span>
+          </div>
+          <p className="text-xs text-stone-600 leading-relaxed font-mono bg-rose-50 p-3 rounded border border-rose-200">
+            {this.state.error?.message || '予期せぬエラーが発生しました'}
+          </p>
+          <div className="flex gap-3">
+            <button
+              type="button"
+              onClick={() => {
+                this.setState({ hasError: false, error: null });
+                window.location.href = window.location.pathname;
+              }}
+              className="px-4 py-2 bg-stone-900 text-white text-xs font-semibold rounded-md hover:bg-stone-800"
+            >
+              初期状態に戻して再表示
+            </button>
+          </div>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
+
 export default function App() {
   const [activeTab, setActiveTab] = useState<'styles' | 'phases' | 'ceremony' | 'simulator' | 'beauty' | 'proposal'>('styles');
   const [userRole, setUserRole] = useState<'planner' | 'couple'>('planner');
@@ -38,33 +90,37 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#faf9f6] text-stone-800">
-      {/* ナビゲーションバー */}
-      <Navbar
-        activeTab={activeTab}
-        setActiveTab={setActiveTab}
-        userRole={userRole}
-        setUserRole={setUserRole}
-        onOpenPrint={() => {
-          setActiveTab('proposal');
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        }}
-      />
+    <ErrorBoundary>
+      <div className="min-h-screen flex flex-col bg-[#faf9f6] text-stone-800">
+        {/* ナビゲーションバー */}
+        <Navbar
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+          userRole={userRole}
+          setUserRole={setUserRole}
+          onOpenPrint={() => {
+            setActiveTab('proposal');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+        />
 
-      {/* メインコンテンツエリア */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-8">
-        {/* 【最重要注意点】会場予約前の計画分岐トラップ（最上部に常時提示） */}
-        {activeTab !== 'proposal' && (
-          <PreBookingWarningBanner userRole={userRole} />
-        )}
+        {/* メインコンテンツエリア */}
+        <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-8">
+          {/* 【最重要注意点】会場予約前の計画分岐トラップ */}
+          {activeTab !== 'proposal' && (
+            <PreBookingWarningBanner
+              userRole={userRole}
+              compact={activeTab !== 'styles'}
+            />
+          )}
 
-        {activeTab === 'styles' && (
-          <StyleComparisonView
-            userRole={userRole}
-            onSelectStyleForSim={handleSelectStyleForSim}
-            onGoToCeremony={handleGoToCeremony}
-          />
-        )}
+          {activeTab === 'styles' && (
+            <StyleComparisonView
+              userRole={userRole}
+              onSelectStyleForSim={handleSelectStyleForSim}
+              onGoToCeremony={handleGoToCeremony}
+            />
+          )}
 
         {activeTab === 'phases' && (
           <PhaseManagementView userRole={userRole} />
@@ -166,5 +222,6 @@ export default function App() {
         </div>
       </footer>
     </div>
+  </ErrorBoundary>
   );
 }

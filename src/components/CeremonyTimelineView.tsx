@@ -52,8 +52,14 @@ export const CeremonyTimelineView: React.FC<CeremonyTimelineViewProps> = ({ user
     return () => clearInterval(timer);
   }, [isPlaying]);
 
-  const handleCopyScript = () => {
-    navigator.clipboard.writeText(currentStep.mcScript);
+  const handleCopyScript = async () => {
+    try {
+      if (navigator?.clipboard?.writeText) {
+        await navigator.clipboard.writeText(currentStep.mcScript);
+      }
+    } catch {
+      // fallback
+    }
     setCopiedScript(true);
     setTimeout(() => setCopiedScript(false), 2000);
   };
@@ -75,9 +81,12 @@ export const CeremonyTimelineView: React.FC<CeremonyTimelineViewProps> = ({ user
       <div className="relative overflow-hidden rounded-2xl bg-stone-900 text-white shadow-xl">
         <div className="absolute inset-0 z-0">
           <img
-            src="/src/assets/images/ceremony_jinzen_shiki_1794103261893.jpg"
+            src="/images/ceremony_jinzen_shiki.jpg"
             alt="人前式セレモニーの情景"
             referrerPolicy="no-referrer"
+            onError={(e) => {
+              e.currentTarget.style.display = 'none';
+            }}
             className="w-full h-full object-cover opacity-40"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-stone-950 via-stone-900/85 to-transparent" />

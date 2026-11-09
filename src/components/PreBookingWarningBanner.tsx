@@ -15,22 +15,58 @@ import {
 
 interface PreBookingWarningBannerProps {
   userRole: 'planner' | 'couple';
+  compact?: boolean;
 }
 
-export const PreBookingWarningBanner: React.FC<PreBookingWarningBannerProps> = ({ userRole }) => {
-  const [isExpanded, setIsExpanded] = useState<boolean>(true);
+export const PreBookingWarningBanner: React.FC<PreBookingWarningBannerProps> = ({
+  userRole,
+  compact = false,
+}) => {
+  const [isExpanded, setIsExpanded] = useState<boolean>(!compact);
   const [copiedScript, setCopiedScript] = useState<boolean>(false);
 
   const inquiryScript =
     '【ホテル宴会課への問い合わせ文面例】\n「〇〇ホテル 宴会セールス課 御中\nこのたび、家族および親しい知人を招いた『お祝いの会（祝宴・レセプション）』の開催を検討しております。ゲスト約50名、着席コース料理またはブッフェでの開催を希望しております。宴会場の空き状況と、お料理・お飲み物の宴会プランのご案内をいただけますでしょうか。なお、衣装・カメラマン・進行スタッフ等は手配済みの持ち込みでの実施を予定しておりますので、一般宴会規定に準じた利用条件の確認をお願い申し上げます。」';
 
-  const handleCopyScript = () => {
-    navigator.clipboard.writeText(inquiryScript);
+  const handleCopyScript = async () => {
+    try {
+      if (navigator?.clipboard?.writeText) {
+        await navigator.clipboard.writeText(inquiryScript);
+      }
+    } catch {
+      // fallback
+    }
     setCopiedScript(true);
     setTimeout(() => setCopiedScript(false), 2000);
   };
 
   const { comparison, actionSteps } = PRE_BOOKING_CRITICAL_WARNING;
+
+  // コンパクト表示モード（他タブ用）
+  if (compact && !isExpanded) {
+    return (
+      <div className="rounded-xl border border-amber-300 bg-amber-50/90 p-3.5 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+        <div className="flex items-center gap-2.5">
+          <div className="p-1.5 rounded-lg bg-amber-600 text-white shrink-0">
+            <AlertTriangle className="w-4 h-4" />
+          </div>
+          <div>
+            <span className="font-bold text-amber-950 mr-2">【最重要注意点】</span>
+            <span className="text-stone-800">
+              一流ホテル等「祝う会（宴会枠）」か「一般婚礼予約」かで収支・持込料が激変するため、予約前の計画が必須です。
+            </span>
+          </div>
+        </div>
+        <button
+          type="button"
+          onClick={() => setIsExpanded(true)}
+          className="self-end sm:self-auto px-3 py-1 bg-white hover:bg-amber-100 text-amber-900 font-semibold rounded border border-amber-300 transition-colors shrink-0 shadow-2xs"
+        >
+          詳細・比較を見る
+        </button>
+      </div>
+    );
+  }
 
   return (
     <section className="rounded-2xl border-2 border-amber-600/40 bg-gradient-to-b from-amber-50/90 to-amber-100/30 p-6 sm:p-8 shadow-md space-y-6">
